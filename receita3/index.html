@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      #texto {
+        opacity: 0;
+        transition: opacity 5s ease, visibility 0s 5s;
+        visibility: hidden;
+        margin-top: 10px;
+      }
+      #texto.visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 5s ease, visibility 0s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="button">
+      <button id="botao" onclick="carregarDiv()">Mostrar Texto</button>
+    </div>
+    <div id="texto"></div>
+  </body>
+  <script>
+    function carregarDiv() {
+      let div = document.getElementById("texto");
+      div.innerHTML = "<h1>guinness</h1>";
+    }
+
+    let botao = document.getElementById("botao");
+    botao.addEventListener("click", () => {
+      if (texto.classList.contains("visible")) {
+        texto.classList.remove("visible");
+        botao.textContent = "Mostrar Texto";
+      } else {
+        texto.classList.add("visible");
+        botao.textContent = "Ocultar Texto";
+      }
+    });
+  </script>
+</html>
