@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="estilo.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="container">
+      <button id="botaoCarregar">Carregando cervejas</button>
+      <button id="botaoOrdenar">Mostrar cervejas ordenadas</button>
+      <button id="botaoEmbaralhar">Embaralhar cervejas</button>
+    </div>
+    <div id="meu-amor"></div>
+  </body>
+
+  <script>
+    let cervejas = [
+      "Guiness",
+      "Desperados",
+      "Becks",
+      "Skol",
+      "Brahma",
+      "Heineken",
+    ];
+    //função que tranforma em uma linha de tabela
+    function transformar(item) {
+      return `<tr><td>${item}</td></tr>`;
+    }
+    //função pra eibir a tabela
+    function exibirCervejas(cervejasArray) {
+      let div = document.getElementById("meu-amor");
+      let cervejasHtml = `
+          <table>
+            <thead>
+              <tr>
+                <th>Cervejas</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cervejasArray.map(transformar).join("\n")}
+            </tbody>
+          </table>
+        `;
+
+      div.innerHTML = cervejasHtml;
+    }
+    //carregar cervejas sem ordenaçao
+    function carregarDiv() {
+      exibirCervejas(cervejas);
+    }
+
+    // ordenar as cervejas
+    function ordenarCervejas() {
+      let cervejasOrdenadas = [...cervejas].sort(); // Ordena o array de cervejas
+      exibirCervejas(cervejasOrdenadas);
+    }
+
+    // embaralhar as cervejas
+    function embaralharCervejas() {
+      let cervejasEmbaralhadas = [...cervejas].sort(() => Math.random() - 0.5); // Embaralha aleatoriamente
+      exibirCervejas(cervejasEmbaralhadas);
+    }
+    // botões
+    let botaoCarregar = document.getElementById("botaoCarregar");
+    botaoCarregar.addEventListener("click", carregarDiv);
+
+    let botaoOrdenar = document.getElementById("botaoOrdenar");
+    botaoOrdenar.addEventListener("click", ordenarCervejas);
+
+    let botaoEmbaralhar = document.getElementById("botaoEmbaralhar");
+    botaoEmbaralhar.addEventListener("click", embaralharCervejas);
+  </script>
+</html>
