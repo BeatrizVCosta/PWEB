@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="estilo.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div><button id="botaoCarregar">Carregar Cervejas...</button></div>
+    <div id="cervejasDiv"></div>
+  </body>
+
+  <script>
+    const cervejas = [
+      {
+        name: "Guiness",
+        alcohol: "10%",
+        style: "Imperial Stout",
+        ibu: "45",
+      },
+      {
+        name: "Desperados",
+        alcohol: "6%",
+        style: "Lager",
+        ibu: "25",
+      },
+      {
+        name: "Becks",
+        alcohol: "5%",
+        style: "Pilsen",
+        ibu: "20",
+      },
+    ];
+    const carregarDiv = (
+      cs,
+      divId = "cervejasDiv",
+      headers = ["Nome", "Álcool", "Estilo", "Amargor"],
+      properties = ["name", "alcohol", "style", "ibu"]
+    ) => {
+      const div = document.getElementById(divId);
+
+      const tabelaHtml = `
+        <table>
+          <tr>
+            ${headers.map((header) => `<th>${header}</th>`).join("")}
+          </tr>
+          ${cs
+            .map(
+              (item) => `
+            <tr>
+              ${properties
+                .map((prop) => `<td>${item[prop] || ""}</td>`)
+                .join("")}
+            </tr>
+          `
+            )
+            .join("")}
+        </table>
+      `;
+
+      div.innerHTML = tabelaHtml;
+    };
+
+    const botao = document.getElementById("botaoCarregar");
+    botao.addEventListener("click", () => carregarDiv(cervejas));
+  </script>
+</html>
