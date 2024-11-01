@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <link href="estilo.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div>
+      <a href="#" id="linkCarregar">Carregar Sorvetes</a>
+    </div>
+
+    <div id="conteudo"></div>
+  </body>
+
+  <script>
+    const sorvetes = [
+      "Prestígio",
+      "Chocolate",
+      "Morango",
+      "Creme",
+      "Chocomenta",
+    ];
+
+    // Função carregarDiv que recebe um parâmetro 'cervs' para exibir elementos
+    const carregarDiv = (cervs) => {
+      const div = document.getElementById("conteudo");
+      const tabelaHtml = `
+        <table>
+          <tr><th>Sabores de Sorvete</th></tr>
+          ${cervs.map((item) => `<tr><td>${item}</td></tr>`).join("")}
+        </table>
+      `;
+
+      div.innerHTML = tabelaHtml;
+    };
+    const link = document.getElementById("linkCarregar");
+    link.addEventListener("click", (event) => {
+      event.preventDefault(); // Evita o comportamento padrão do link
+      carregarDiv(sorvetes);
+    });
+  </script>
+</html>
