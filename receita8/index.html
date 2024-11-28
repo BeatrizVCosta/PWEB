@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="estilo.css" rel="stylesheet" />
+    <title>Explorador de API</title>
+</head>
+
+<body>
+    <h1>Explorador de API</h1>
+    <div>
+        <button id="botaoComidas">Carregar Comidas</button>
+    </div>
+    <div class="content" id="tabelaDiv"></div>
+
+    <script type="module">
+        import { gerarTabela } from './tabela.js';
+
+        const API_BASE = 'https://random-data-api.com/api/';
+
+        function carregarDados(endpoint, tamanho = 5) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', `${API_BASE}/${endpoint}?size=${tamanho}`);
+                xhr.responseType = 'json';
+
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(new Error(`Erro na requisição: ${xhr.statusText}`));
+                    }
+                };
+
+                xhr.onerror = () => {
+                    reject(new Error('Erro na conexão'));
+                };
+
+                xhr.send();
+            });
+        }
+
+        document.getElementById('botaoComidas').addEventListener('click', () => {
+            carregarDados('food/random_food', 5)
+                .then(dados => {
+                    const colunas = ['dish', 'description', 'ingredient'];
+                    gerarTabela('tabelaDiv', dados, colunas);
+                })
+                .catch(err => {
+                    console.error('Erro ao carregar dados:', err);
+                    document.getElementById('tabelaDiv').innerText = 'Erro ao carregar comidas';
+                });
+        });
+    </script>
+</body>
+
+</html>
