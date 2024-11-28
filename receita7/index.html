@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="estilo.css" rel="stylesheet" />
+    <title>Explorador de API</title>
+
+</head>
+
+<body>
+    <h1>Explorador de API</h1>
+    <div>
+        <button id="botaoCervejas">Carregar Cervejas</button>
+        <button id="botaoComidas">Carregar Comidas</button>
+    </div>
+    <div class="content" id="tabelaDiv"></div>
+
+    <script type="module">
+        import { gerarTabela } from './tabela.js';
+
+        const API_BASE = 'https://random-data-api.com/api/';
+
+        async function carregarDados(endpoint, tamanho = 5) {
+            try {
+                const res = await fetch(`${API_BASE}/${endpoint}?size=${tamanho}`);
+                return await res.json();
+            } catch (err) {
+                console.error('Erro ao carregar dados:', err);
+                return null;
+            }
+        }
+
+        document.getElementById('botaoCervejas').addEventListener('click', async () => {
+            const dados = await carregarDados('v2/beers', 5);
+            if (dados) {
+                const colunas = ['name', 'alcohol', 'style', 'ibu', 'brand'];
+                gerarTabela('tabelaDiv', dados, colunas);
+            } else {
+                document.getElementById('tabelaDiv').innerText = 'Erro ao carregar cervejas.';
+            }
+        });
+
+        document.getElementById('botaoComidas').addEventListener('click', async () => {
+            const dados = await carregarDados('food/random_food', 5);
+            if (dados) {
+                const colunas = ['dish', 'description', 'ingredient'];
+                gerarTabela('tabelaDiv', dados, colunas);
+            } else {
+                document.getElementById('tabelaDiv').innerText = 'Erro ao carregar comidas';
+            }
+        });
+    </script>
+</body>
+
+</html>
