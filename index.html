@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Tabela de Cachaças</title>   
+      <link href="estilo.css" rel="stylesheet" />   
+   </head>
+   <body>
+
+      <div id="app">
+         <button id="mostrarTabela">Mostrar Tabela de Cachaças</button>
+      </div>
+
+      <script src="libs/react.js"></script>
+      <script src="libs/react-dom.js"></script>
+      <script src="libs/babel.js"></script>
+
+      <script type="text/babel">
+         // Definindo um array fixo
+         const cachacas = [
+            { nome: "Havana", marca: "Engenho Anísio Santiago", preco: "R$ 80,00" },
+            { nome: "Ypióca", marca: "Ypióca", preco: "R$ 50,00" },
+            { nome: "51", marca: "Pernod Ricard", preco: "R$ 25,00" },
+            { nome: "Cachaça Leblon", marca: "Leblon", preco: "R$ 150,00" }
+         ];
+
+         // Função que retorna o JSX da tabela
+         function TabelaCachacas() {
+            return (
+               <table id="tabela" border="1">
+                  <thead>
+                     <tr>
+                        <th>Nome</th>
+                        <th>Marca</th>
+                        <th>Preço</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {cachacas.map((cachaça, index) => (
+                        <tr key={index}>
+                           <td>{cachaça.nome}</td>
+                           <td>{cachaça.marca}</td>
+                           <td>{cachaça.preco}</td>
+                        </tr>
+                     ))}
+                  </tbody>
+               </table>
+            );
+         }
+
+         // Função para exibir a tabela ao clicar no botão
+         function mostrarTabela() {
+            ReactDOM.render(
+               <TabelaCachacas />,
+               document.getElementById("app")
+            );
+         }
+
+         // Adicionando o evento de clique no botão
+         document.getElementById("mostrarTabela").addEventListener("click", mostrarTabela);
+
+      </script>
+   </body>
+</html>
+
