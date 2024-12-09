@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receita 9</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="libs/react.js"></script>
+
+    <script src="libs/react-dom.js"></script>
+
+    <script>
+      ReactDOM.render(
+        React.createElement(
+          "table",
+
+          { id: "tabela", border: "1" },
+
+          React.createElement(
+            "tr",
+
+            null,
+
+            React.createElement("th", null, "Nome"),
+
+            React.createElement("th", null, "idade")
+          ),
+
+          React.createElement(
+            "tr",
+
+            null,
+
+            React.createElement("td", null, "Beatriz"),
+
+            React.createElement("td", null, "20 anos")
+          ),
+
+          React.createElement(
+            "tr",
+
+            null,
+
+            React.createElement("td", null, "Eloisa"),
+
+            React.createElement("td", null, "21 anos")
+          ),
+
+          React.createElement(
+            "tr",
+
+            null,
+
+            React.createElement("td", null, "Giovanna"),
+
+            React.createElement("td", null, "21 anos")
+          )
+        ),
+
+        document.getElementById("app")
+      );
+    </script>
+  </body>
+</html>
