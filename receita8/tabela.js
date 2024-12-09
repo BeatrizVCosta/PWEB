@@ -1,4 +1,5 @@
 export function gerarTabela(elementoId, dados, colunas) {
+    console.log('gerarTabela chamada');
     const container = document.getElementById(elementoId);
 
     if (!dados || !Array.isArray(dados) || dados.length === 0) {
