@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>ReceitaReact - 3</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script src="libs/react.js"></script>
+
+    <script src="libs/react-dom.js"></script>
+
+    <script src="libs/babel.js"></script>
+
+    <script type="text/babel">
+      const TabelaBebidas = ({ titulo, cabecalhos, dados }) => {
+        return (
+          <div>
+            <h1>{titulo}</h1>
+            <table id="tabela" border="1">
+              <thead>
+                <tr>
+                  {cabecalhos.map((cabecalho, index) => (
+                    <th key={index}>{cabecalho}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {dados.map((linha, indexLinha) => (
+                  <tr key={indexLinha}>
+                    {linha.map((celula, indexCelula) => (
+                      <td key={indexCelula}>{celula}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      };
+
+      const valoresCabecalhos = ["Nome", "Marca", "Preço"];
+      const dadosTabela = [
+        ["Havana", "Engenho Anísio Santiago", "R$50"],
+        ["Johnnie Walker", "Diageo", "R$120"],
+        ["Absolut", "Pernod Ricard", "R$90"],
+      ];
+
+      ReactDOM.render(
+        <TabelaBebidas
+          titulo="Tabela de Bebidas"
+          cabecalhos={valoresCabecalhos}
+          dados={dadosTabela}
+        />,
+        document.getElementById("app")
+      );
+    </script>
+  </body>
+</html>
