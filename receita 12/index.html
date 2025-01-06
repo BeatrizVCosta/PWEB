@@ -33,6 +33,11 @@
                     {linha.map((celula, indexCelula) => (
                       <td key={indexCelula}>{celula}</td>
                     ))}
+                    {Array.from({
+                      length: cabecalhos.length - linha.length,
+                    }).map((_, indexVazio) => (
+                      <td key={`vazio-${indexVazio}`}></td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
@@ -44,7 +49,7 @@
       const valoresCabecalhos = ["Nome", "Marca", "Preço"];
       const dadosTabela = [
         ["Havana", "Engenho Anísio Santiago", "R$50"],
-        ["Johnnie Walker", "Diageo", "R$120"],
+        ["Johnnie Walker", "Diageo"],
         ["Absolut", "Pernod Ricard", "R$90"],
       ];
 
